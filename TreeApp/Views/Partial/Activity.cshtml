@@ -1,0 +1,66 @@
+﻿@using TreeApp.Helpers
+@using TreeApp.Models
+
+@section head{
+    @Styles.Render("~/Content/Tree.css")
+}
+
+
+@model List<Activities>
+
+@for (var i = 0; i < Model.Count; i++)
+{
+    if (Model[i].ChildActivities.Count > 0)
+    {
+        var ahref = "hide" + @Model[i].ActivityID;
+        <li>
+            <div class="parent">
+                <div class="pull-right child">
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add", "Add", "Activities", new { id = Model[i].ActivityID }, new { @class = "btn btn-primary btn-lg" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil '></span>", "Edit", "Edit", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-success btn-lg" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-search'></span>", "Details", "Details", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-info btn-lg" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-warning btn-lg" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-sort-by-alphabet'></span>", "Sort ascending", "Sort", "Activities", new { id = Model[i].ActivityID, sort = "asc" }, new { data_modal = "", @class = "btn btn-danger btn-lg" })
+                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-sort-by-alphabet-alt'></span>", "Sort descending", "Sort", "Activities", new { id = Model[i].ActivityID, sort = "desc" }, new { data_modal = "", @class = "btn btn-danger btn-lg" })
+                </div>
+                <a class="a-with-children" href="#@ahref" data-toggle="collapse">
+                    @Html.CheckBox(@Model[i].ActivityDescription, false, new { @value = Model[i].ActivityID, @class = "tree-checkbox parent" })
+                    <label for=@Model[i].ActivityID>
+                        @Html.DisplayFor(list => list[i].ActivityDescription)
+                    </label>
+                </a>
+            </div>
+            <ul>
+                <div id="@ahref" class="panel-collapse collapse in">
+                    @{
+                        Html.RenderPartial("~/Views/Partial/Activity.cshtml", Model[i].ChildActivities);
+                    }
+                </div>
+            </ul>
+        </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="parent">
+                                    <div class="pull-right child">
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add", "Add", "Activities", new { id = Model[i].ActivityID }, new { @class = "btn btn-primary btn-lg" })
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil '></span>", "Edit", "Edit", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-success btn-lg" })
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-search'></span>", "Details", "Details", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-info btn-lg" })
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-trash'></span>", "Delete", "Delete", "Activities", new { id = Model[i].ActivityID }, new { data_modal = "", @class = "btn btn-warning btn-lg" })
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-sort-by-alphabet'></span>", "Sort ascending", "Sort", "Activities", new { id = Model[i].ActivityID, sort = "asc" }, new { data_modal = "", @class = "btn btn-danger btn-lg" })
+                                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-sort-by-alphabet-alt'></span>", "Sort descending", "Sort", "Activities", new { id = Model[i].ActivityID, sort = "desc" }, new { data_modal = "", @class = "btn btn-danger btn-lg" })
+                                    </div>
+                                    <a href="#">
+                                        @Html.CheckBox(@Model[i].ActivityDescription, false, new { @value = Model[i].ActivityID, @class = "tree-checkbox parent" })
+                                        <label for=@Model[i].ActivityID>
+                                            @Html.DisplayFor(list => list[i].ActivityDescription)
+                                        </label>
+                                    </a>
+                                </div>
+                            </li>
+                            }
+                        }
+@section scripts{
+    @Scripts.Render("~/Scripts/tree.js")
+}

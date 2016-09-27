@@ -1,0 +1,49 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.left {
+    float:left;
+    width:500px;
+    height: 400px;
+}
+
+.scrollable {
+    overflow: auto
+}
+
+.right {
+    float: right;
+    width:500px;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.required
+{
+    border-left:5px solid #ee0000 !important;
+    width: 250px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}

@@ -1,0 +1,118 @@
+﻿.tree li {  
+    margin: 0px 0;    
+    list-style-type: none;  
+    position: relative;  
+    padding: 20px 5px 0px 5px;  
+}  
+  
+.tree li::before{  
+    content: '';  
+    position: absolute;   
+    top: 0;  
+    width: 1px;   
+    height: 100%;  
+    right: auto;   
+    left: -20px;  
+    border-left: 1px solid #ccc;  
+    bottom: 50px;  
+}  
+.tree li::after{  
+    content: '';  
+    position: absolute;   
+    top: 30px;   
+    width: 25px;   
+    height: 20px;  
+    right: auto;   
+    left: -20px;  
+    border-top: 1px solid #ccc;  
+} 
+
+.tree li a{  
+    display: inline-block;  
+    padding: 5px 10px;  
+    border: 1px solid #ccc;
+    text-decoration: none;  
+    color: #666;      
+    font-family: 'Open Sans',sans-serif;  
+    font-size: 14px;  
+    font-weight :600;  
+    border-radius: 5px;  
+    -webkit-border-radius: 5px;  
+    -moz-border-radius: 5px;  
+}  
+
+.a-with-children{  
+    display: inline-block;  
+    padding: 5px 10px;  
+    border: 1px solid #ccc;
+    text-decoration: none;  
+    color: #666;      
+    font-family: 'Open Sans',sans-serif;  
+    font-size: 14px;  
+    font-weight :600;  
+    border-radius: 5px;  
+    -webkit-border-radius: 5px;  
+    -moz-border-radius: 5px;
+    background-color: #F5F5F5; 
+}  
+
+.child {
+    display: none;
+}
+
+.parent:hover .child {
+    display: block;
+}
+  
+.tree > ul > li::before, .tree > ul > li::after{  
+    border: 0;  
+}  
+
+.tree li:last-child::before{   
+      height: 30px;  
+}  
+
+
+.tree li div a:hover {  
+     background: #38A6B7; color: #ffffff; border: 1px solid #38A6B7;  
+}  
+
+.tree-checkbox{  
+    margin :4px !important;  
+}  
+  
+   
+.tree:before {  
+    border-left:  1px solid #ccc;  
+    bottom: 16px;  
+    content: "";  
+    display: block;  
+    left: 0;  
+    position: absolute;  
+    top: -21px;  
+    width: 1px;  
+    z-index: 1;  
+}  
+  
+.tree ul:after {  
+    border-top: 1px solid #ccc;  
+    content: "";  
+    height: 20px;  
+    left: -29px;  
+    position: absolute;  
+    right: auto;  
+    top: 37px;  
+  
+}  
+
+*:before, *:after {  
+    box-sizing: border-box;  
+}  
+*:before, *:after {  
+    box-sizing: border-box;  
+}  
+.tree {  
+    overflow: auto;  
+    padding-left: 10px;  
+    position: relative;  
+}  

@@ -1,0 +1,73 @@
+﻿@using TreeApp.Models
+@model TreeApp.Models.Activities
+
+@section head{
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/Tree.css")
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/tree.js")
+}
+
+@{
+    var parentActivity = (int?) ViewBag.ParentActivity;
+    var parentActivityDescription = (string) ViewBag.ParentActivityDescription;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary">
+        <div class="panel-heading panel-head">Activities</div>
+        <div id="frm-author" class="panel-body">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Add activity</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.Label("Parent activity description", new { @class = "control-label col-sm-3" })
+                        <div class="col-sm-9">
+                            @Html.TextBox("ParentActivityDescription", parentActivityDescription, new {@class = "form-control required", @disabled = "disabled"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ActivityDescription, new {@class = "control-label col-sm-3"})
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(m => m.ActivityDescription, new {@class = "form-control required"})
+                            @Html.ValidationMessageFor(m => m.ActivityDescription, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.StartDateTime, new {@class = "control-label col-sm-3"})
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(m => m.StartDateTime, new {@class = "form-control required", @Value = DateTime.Now.ToShortDateString()})
+                            @Html.ValidationMessageFor(m => m.StartDateTime, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EndDateTime, new {@class = "control-label col-sm-3"})
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(m => m.EndDateTime, new {@class = "form-control required", @Value = DateTime.Now.ToShortDateString()})
+                            @Html.ValidationMessageFor(m => m.EndDateTime, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.ParentActivityID, new {Value = parentActivity})
+                @Html.HiddenFor(m => m.ActivityID)
+                @Html.ValidationMessage("ParentActivityId")
+            </div>
+
+            <div class="modal-footer">
+                <input type="submit" value="Add" class="btn btn-success" />
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
